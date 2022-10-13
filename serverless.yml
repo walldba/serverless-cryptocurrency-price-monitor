@@ -8,13 +8,14 @@ provider:
   name: aws
   runtime: nodejs14.x
   environment:
-    teste: 'wall'
+    CRYPTO_BASE_URL: 'https://www.mercadobitcoin.net/api/'
+    CURRENCY: 'BTC'
 
 plugins:
   - serverless-offline
 
 functions:
   getPrice:
-    handler: src/cronjob/handler.getPrice
+    handler: src/index.getPriceJob
     events:
       - schedule: rate(1 minute)
