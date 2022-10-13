@@ -1,0 +1,20 @@
+org: walldba
+app: serverless-cryptocurrency-price-monitor
+service: serverless-cryptocurrency-price-monitor
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  environment:
+    teste: 'wall'
+
+plugins:
+  - serverless-offline
+
+functions:
+  getPrice:
+    handler: src/cronjob/handler.getPrice
+    events:
+      - schedule: rate(1 minute)
