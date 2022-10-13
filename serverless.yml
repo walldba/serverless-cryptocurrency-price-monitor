@@ -10,9 +10,33 @@ provider:
   environment:
     CRYPTO_BASE_URL: 'https://www.mercadobitcoin.net/api/'
     CURRENCY: 'BTC'
+    DYNAMODB_TABLE: 'cryptocurrency_prices'
 
 plugins:
   - serverless-offline
+
+  
+resources:
+  Resources:
+    CryptoTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:provider.environment.DYNAMODB_TABLE}
+        AttributeDefinitions:
+          - AttributeName: currency
+            AttributeType: S
+          - AttributeName: price
+            AttributeType: S
+        KeySchema:
+          - AttributeName: currency
+            KeyType: HASH
+          - AttributeName: price
+            KeyType: RANGE
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        StreamSpecification:
+          StreamViewType: NEW_AND_OLD_IMAGES
 
 functions:
   getPrice:
