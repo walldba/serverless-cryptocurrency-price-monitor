@@ -1,3 +1,3 @@
 module.exports = {
-  getPriceJob: require('./getPriceJob/handler'),
+  getPriceJob: require('./apps/getPriceJob/factory'),
 };
