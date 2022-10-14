@@ -17,15 +17,16 @@ class Handler {
       console.log(`Got crypto ${this.currencyName} price!`);
 
       console.log('Preparing data to insert');
-      const data = this.dynamoDbService.prepareData(
+      const data = this.dynamoDbService.prepareDataToInsert(
         this.currencyName,
         cryptoPrice.ticker.last
       );
 
-      await this.dynamoDbService.insertItem(data);
+      await this.dynamoDbService.insertData(data);
       console.log('Data was inserted', data);
     } catch (error) {
       console.log('Failed on execute price monitoring...', error);
+      throw error;
     }
   }
 }
