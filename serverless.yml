@@ -6,16 +6,27 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x
   environment:
     CRYPTO_BASE_URL: 'https://www.mercadobitcoin.net/api/'
     CURRENCY: 'BTC'
     DYNAMODB_TABLE: 'cryptocurrency_prices'
 
+  iam:
+    role:
+      statements:
+      - Effect: Allow
+        Action:
+          - dynamodb:GetItem
+          - dynamodb:UpdateItem
+          - dynamodb:PutItem
+          - dynamodb:ListStreams
+          - dynamodb:DescribeStream
+        Resource: "*"
+
 plugins:
   - serverless-offline
 
-  
 resources:
   Resources:
     CryptoTable:
@@ -43,3 +54,14 @@ functions:
     handler: src/index.getPriceJob
     events:
       - schedule: rate(1 minute)
+
+  dynamoTrigger:
+    handler: src/index.dynamoTrigger
+    events:
+      - stream:
+          enabled: true
+          type: dynamodb
+          arn:
+            Fn::GetAtt:
+              - CryptoTable
+              - StreamArn
