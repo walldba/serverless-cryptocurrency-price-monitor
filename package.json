@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx nodemon --exec npm run offline",
     "offline": "npx sls offline start --host 0.0.0.0",
-    "invoke": "npx sls invoke local -f getPrice"
+    "invoke:getPrice": "npx sls invoke local -f getPrice",
+    "invoke:dynamoTrigger": "npx sls invoke local -f dynamoTrigger"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,7 @@
   "homepage": "https://github.com/walldba/serverless-cryptocurrency-price-monitor#readme",
   "dependencies": {
     "aws-sdk": "^2.1231.0",
+    "axios": "^1.1.2",
     "nodemon": "^2.0.20"
   },
   "devDependencies": {
