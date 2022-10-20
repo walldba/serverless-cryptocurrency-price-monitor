@@ -7,7 +7,7 @@
     "start": "npx nodemon --exec npm run offline",
     "offline": "npx sls offline start --host 0.0.0.0",
     "invoke:getPrice": "npx sls invoke local -f getPrice",
-    "invoke:dynamoTrigger": "npx sls invoke local -f dynamoTrigger --path ./mocks/dynamo.stream-mock.json"
+    "invoke:sendNotification": "npx sls invoke local -f sendNotification --path ./mocks/dynamo.stream-mock.json"
   },
   "repository": {
     "type": "git",
