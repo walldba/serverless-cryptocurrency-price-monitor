@@ -1,40 +1,28 @@
 {
   "Records": [
     {
-      "eventID": "d25b58f8af04ded46470033bb021091d",
+      "eventID": "235cc71e5d7e4e90bd2682aec6bda06f",
       "eventName": "INSERT",
       "eventVersion": "1.1",
       "eventSource": "aws:dynamodb",
       "awsRegion": "us-east-1",
       "dynamodb": {
-        "ApproximateCreationDateTime": 1665762291,
+        "ApproximateCreationDateTime": 1666300169,
         "Keys": {
-          "price": {
-            "S": "102771.38"
-          },
-          "currency": {
-            "S": "BTC"
-          }
+          "oscillation": { "S": "70.10000000000582" },
+          "currency": { "S": "BTC" }
         },
         "NewImage": {
-          "createdAt": {
-            "S": "2022-10-14T15:44:51.288Z"
-          },
-          "price": {
-            "S": "102771.38"
-          },
-          "currency": {
-            "S": "BTC"
-          },
-          "id": {
-            "S": "291cea3c-04fc-4aad-bbba-a56f00b99119"
-          }
+          "createdAt": { "S": "2022-10-20T21:09:29.389Z" },
+          "oscillation": { "S": "70.10000000000582" },
+          "currency": { "S": "BTC" },
+          "id": { "S": "4450d195-9619-4d22-b19a-08198a2af911" }
         },
-        "SequenceNumber": "600000000019497001065",
-        "SizeBytes": 121,
-        "StreamViewType": "NEW_AND_OLD_IMAGES"
+        "SequenceNumber": "200000000034159122743",
+        "SizeBytes": 149,
+        "StreamViewType": "NEW_IMAGE"
       },
-      "eventSourceARN": "arn:aws:dynamodb:us-east-1:459851736513:table/cryptocurrency_prices/stream/2022-10-14T15:36:22.414"
+      "eventSourceARN": "arn:aws:dynamodb:us-east-1:459851736513:table/cryptocurrency_oscillations/stream/2022-10-20T20:57:50.838"
     }
   ]
 }
