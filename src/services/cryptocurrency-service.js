@@ -10,7 +10,12 @@ class CryptocurrencyService {
       `${this.cryptoBaseUrl}${this.currency}/ticker`
     );
 
-    if (response.status == '200') return response.data;
+    if (response.status == '200') {
+      console.log(
+        `${CryptocurrencyService.name}: Got new crypto ${this.currency} price!`
+      );
+      return +Number(response.data.ticker.last).toFixed(2);
+    }
 
     return null;
   }
