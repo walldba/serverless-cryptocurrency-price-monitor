@@ -13,6 +13,8 @@ provider:
     PERCENTAGE_VALUE: '0.01'
     DYNAMODB_PRICES_TABLE: 'cryptocurrency_prices'
     DYNAMODB_OSCILLATIONS_TABLE: 'cryptocurrency_oscillations'
+    SES_EMAIL_TO: wallacedba@gmail.com
+    SES_EMAIL_FROM: wallacedba@gmail.com
 
   iam:
     role:
@@ -24,6 +26,11 @@ provider:
           - dynamodb:PutItem
           - dynamodb:ListStreams
           - dynamodb:DescribeStream
+        Resource: "*"
+
+      - Effect: Allow
+        Action:
+          - ses:SendEmail
         Resource: "*"
 
 plugins:
@@ -73,10 +80,10 @@ functions:
   getPrice:
     handler: src/index.getPriceJob
     events:
-      - schedule: rate(1 minute)
+      - schedule: rate(5 minute)
 
-  dynamoTrigger:
-    handler: src/index.dynamoTrigger
+  sendNotification:
+    handler: src/index.sendNotification
     events:
       - stream:
           enabled: true
