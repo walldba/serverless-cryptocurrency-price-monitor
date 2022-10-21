@@ -1,4 +1,4 @@
-# Serverless Crytocurrency Price Monitor
+# Serverless Cryptocurrency Price Monitor
 
 ### Linkedin: https://www.linkedin.com/in/walldba/
 
