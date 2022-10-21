@@ -1,7 +1,7 @@
 {
   "name": "serverless-cryptocurrency-price-monitor",
   "version": "1.0.0",
-  "description": "<!-- title: 'AWS NodeJS Example' description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.' layout: Doc framework: v3 platform: AWS language: nodeJS priority: 1 authorLink: 'https://github.com/serverless' authorName: 'Serverless, inc.' authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4' -->",
+  "description": "This app was built to monitor a cryptocurrency price and send a notification if the price had an oscillation. To create this solution, I used Serverless Framework, AWS Lambda, DynamoDB and SES. To avoid unnecessary charges on AWS, I chose use the Localstack to simulate AWS environment offline.",
   "main": "handler.js",
   "scripts": {
     "start": "npx nodemon --exec npm run offline",
