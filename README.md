@@ -1,72 +1,72 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Serverless Crytocurrency Price Monitor
 
+### Linkedin: https://www.linkedin.com/in/walldba/
 
-# Serverless Framework AWS NodeJS Example
+## Index
 
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+- [About](#about)
+- [Diagram](#diagram)
+- [Usage](#usage)
+- [Technologies](#technologies)
+
+## About
+This app was built to monitor a cryptocurrency price and send a notification if the price had an oscillation. 
+To create this solution, I used Serverless Framework, AWS Lambda, DynamoDB and SES.
+To avoid unnecessary charges on AWS, I chose use the Localstack to simulate AWS environment offline.
+
+## Diagram
+
+![Alt text](/docs/solution-diagram.png?raw=true 'Solution Diagram')
 
 ## Usage
-
-### Deployment
-
-In order to deploy the example, you need to run the following command:
-
-```
-$ serverless deploy
-```
-
-After running deploy, you should see output similar to:
+### To run on development:
+To install all packages use the command:
 
 ```bash
-Deploying aws-node-project to stage dev (us-east-1)
-
-✔ Service deployed to stack aws-node-project-dev (112s)
-
-functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
+yarn install
 ```
 
-### Invocation
-
-After successful deployment, you can invoke the deployed function by using the following command:
+To simulate AWS enviromennt offline using localstack:
 
 ```bash
-serverless invoke --function hello
+docker compose up -d
 ```
 
-Which should result in response similar to the following:
-
-```json
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
-}
-```
-
-### Local development
-
-You can invoke your function locally by using the following command:
+To create the dynamoDb tables:
 
 ```bash
-serverless invoke local --function hello
+bash ./scripts/create-db-table.sh
 ```
 
-Which should result in response similar to the following:
+To invoke functions locally:
 
+```bash
+yarn invoke:getPrice
+yarn invoke:sendNotification
 ```
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
+
+### To run on Serverless Framework:
+- Configure AWS envinments:
+  
+  - AWS config file:
+    ```
+    [default]
+    region=us-east-1
+    output=json
+    ```
+  - AWS credentials file:
+    ```
+    [default]
+    aws_access_key_id=<YOUR_AWS_ACCESS_KEY>
+    aws_secret_access_key=<YOUR_AWS_SECRET_ACCESS_KEY>
+
+To deploy functions:
+
+```bash
+sls deploy
 ```
+
+## Technologies
+
+- [Serveless Framework](https://www.serverless.com/)
+- [Localstack](https://localstack.cloud/)
